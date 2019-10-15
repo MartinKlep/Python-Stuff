@@ -200,3 +200,40 @@ print("1994: ", intToRomanRec(1994))
 print("3: ", intToRomanRec(3))
 print("20943: ", intToRomanRec(20943)) 
 """
+
+recResult2 = 0
+def romanToIntRec(roma):
+    global recResult2
+    if roma == "":
+        result = recResult2
+        recResult2 = 0
+        return result
+    elif isinstance(roma, str) == False:
+        return "NOT A STRING!"
+    else:
+        roma = roma.upper()
+        if checkRomanLetters(roma) == False or checkRomanString(roma) == False:
+            return "Not a proper Roman Number!"
+        else:
+            if len(roma) == 1:
+                recResult2 += rToI(roma[0])
+                roma = ""
+            else:
+                if rToI(roma[0]) < rToI(roma[1]):
+                    recResult2 -= rToI(roma[0])
+                else:
+                   recResult2 += rToI(roma[0])
+                roma = roma[1:]
+            return romanToIntRec(roma)
+
+"""
+print("-------------------------------------------")
+print("Testing recursive roman to int")     
+print()
+print("245: " , romanToIntRec(245))
+print("AXBL: " , romanToIntRec("AXBL"))
+print("MXX: " , romanToIntRec("MXX"))
+print("MCMXCIV: " , romanToIntRec("MCMXCIV"))
+print("XXL: " , romanToIntRec("XXL"))
+print("XLX: " , romanToIntRec("XLX"))     
+"""
